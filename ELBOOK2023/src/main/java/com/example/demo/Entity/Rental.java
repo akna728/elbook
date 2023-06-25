@@ -18,7 +18,5 @@ public class Rental {
 	private Date return_day;
 	
 	private boolean dlt_flg;
-	
-	private String book_name;
 
 }

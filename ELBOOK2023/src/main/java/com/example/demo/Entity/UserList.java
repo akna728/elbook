@@ -3,8 +3,9 @@ package com.example.demo.Entity;
 import java.io.Serializable;
 import java.sql.Date;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -19,7 +20,8 @@ public class UserList implements Serializable {
 	private String mail;
 	
 	@NotBlank
-	@Size(min = 12, max = 200)
+	@Length(min=8, max=32)
+	@jakarta.validation.constraints.Pattern(regexp="[a-zA-Z0-9]*")
 	private String pass;
 	
 	private Date create_time;
