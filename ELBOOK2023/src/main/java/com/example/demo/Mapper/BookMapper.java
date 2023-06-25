@@ -3,10 +3,12 @@ package com.example.demo.Mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.Entity.BookList;
 
 @Mapper
+@Repository
 public interface BookMapper {
 	
 	List<BookList> findBook();
