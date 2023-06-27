@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.Repository.UserRepository;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -32,6 +35,11 @@ public class UserList implements Serializable {
 	
 	public enum Authority{
 		ADMIN, USER,
+	}
+	
+	@Autowired
+	public UserList(UserRepository userRepository) {
+		this.user_Id = userRepository.getUser_Id();
 	}
 
 }

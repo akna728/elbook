@@ -3,6 +3,9 @@ package com.example.demo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,9 @@ public class BookController {
 	@Autowired
     private BookService bookService;
 	
+//	@Autowired
+//	UserList user_info = new UserList(null);
+	
 	// コンポーネント間の結合度を低くし、柔軟性とテスト容易性を向上させる
     public BookController(BookService bookService) {
         this.bookService = bookService;
@@ -32,7 +38,9 @@ public class BookController {
 
     @GetMapping("/booklist")
     public String getBookList(Model model) {
-        int rental_key_id = 0;	//rental_key_idとは。
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        int rental_key_id = userDetails.getUserId();
         List<BookList> bookList = bookService.getBookList(rental_key_id);
         model.addAttribute("bookList", bookList);
         return "booklist";
