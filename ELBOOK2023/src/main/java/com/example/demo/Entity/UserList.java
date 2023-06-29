@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.Repository.UserRepository;
 
@@ -37,9 +36,8 @@ public class UserList implements Serializable {
 		ADMIN, USER,
 	}
 	
-	@Autowired
 	public UserList(UserRepository userRepository) {
-		this.user_Id = userRepository.getUser_Id();
+		this.user_id = userRepository.getUser_Id();
 	}
 
 }
