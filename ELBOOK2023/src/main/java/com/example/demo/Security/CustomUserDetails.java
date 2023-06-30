@@ -5,21 +5,23 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.demo.Entity.UserList;
+
 public class CustomUserDetails implements UserDetails {
 
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    private int userId;
+	private int userId;
 
-    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, int userId) {
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-        this.userId = userId;
+    public CustomUserDetails(UserList userList) {
+        this.username = userList.getUser_name();
+        this.password = userList.getPass();
+        this.authorities = userList.getAuthority();
+        this.userId = userList.getUser_id();
     }
 
-    @Override
+	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
@@ -32,10 +34,6 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return username;
-    }
-
-    public int getUserId() {
-        return userId;
     }
 
     // 以下のメソッドは必要に応じて実装する

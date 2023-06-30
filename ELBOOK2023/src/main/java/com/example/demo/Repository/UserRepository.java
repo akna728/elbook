@@ -1,12 +1,13 @@
 package com.example.demo.Repository;
 
-import org.apache.catalina.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+import com.example.demo.Entity.UserList;
 
-	int getUser_Id();
+@Mapper
+public interface UserRepository {
 
-	Object findByUser_Id(User user);
-
+	@Select("select * from el_user where user_name = #{username} and delete_flg = 0")
+	UserList findByUsername(String username);
 }
