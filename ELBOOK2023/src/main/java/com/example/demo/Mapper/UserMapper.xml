@@ -5,6 +5,7 @@
 	<resultMap id="Base_Result_Map" type="com.example.demo.Entity.UserList">
 		<id column="user_id" property="user_id" jdbcType="INTEGER" />
 	</resultMap>
+	
 
 	<select id="findUser" resultMap="Base_Result_Map">
 		SELECT 

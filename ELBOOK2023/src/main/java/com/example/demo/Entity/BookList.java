@@ -3,6 +3,8 @@ package com.example.demo.Entity;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -21,6 +23,8 @@ public class BookList {
 	private Date create_time;
 	
 	private LocalDateTime update_time;
+	
+	private MultipartFile file;
 	
 	private String file_name;
 	
