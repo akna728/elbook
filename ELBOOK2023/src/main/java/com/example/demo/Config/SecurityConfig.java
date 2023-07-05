@@ -20,24 +20,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		
-		web
-				.ignoring()
-				.antMatchers("/images/**", "/css/**", "/js/**");
+		web	.ignoring()
+			.antMatchers("/images/**", "/css/**", "/js/**");
 		
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http
-				.authorizeRequests().mvcMatchers("/login/**", "/index/showsignup", "/user.signupuser").permitAll()
-				.and()
-				.authorizeRequests().mvcMatchers("/user/**").hasAuthority("ADMIN").anyRequest().authenticated()
-				.and()
-				.formLogin().loginPage("/login")
-				.and()
-				.formLogin().defaultSuccessUrl("/book/list");
-		http.exceptionHandling().accessDeniedPage("/error");
+		// htmlファイルを指定しているのではなく、リクエストURL
+		
+//		http.authorizeRequests().mvcMatchers("/login/**", "/index/showsignup", "/user.signupuser").permitAll()
+//			.and()
+//			.authorizeRequests().mvcMatchers("/user/**").hasAuthority("ADMIN").anyRequest().authenticated()
+//			.and()
+//			.formLogin().loginPage("/login")
+//			.and()
+//			.formLogin().defaultSuccessUrl("/book/list");
+//		http.exceptionHandling().accessDeniedPage("/error");
+		
+		http.authorizeRequest()
+			.antMatchers("/images/**", "/css/**", "/js/**").permitAll()
+			.anyRequest().authenticated()
+			.and()
+			.formLogin().loginPage("/login")
+			.usernameParameter("username").passwordParameter("password").permitAll()
+			.and()
+			.logout().logoutUrl("/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID");
 		
 	}
 	
